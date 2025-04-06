@@ -27,16 +27,13 @@ jobs:
       with:
         context: .
         push: true
-        tags:pmoise021/hello-world-python:latest
+        tags: pmoise021/hello-world-python:latest
 
-    - name: Deploy to your server (Optional)
+    - name: Deploy to server via SSH
       run: |
-        echo "Add deployment steps here"
-        - name: Deploy to server
-  run: |
-    ssh -i ${{ secrets.DEPLOY_KEY }} user@144.126.208.105 << EOF
-      docker pull pmoise021/hello-world-python:latest
-      docker run -d --name hello-world-app -p 80:8080 pmoise021/hello-world-python:latest
-    EOF
-
-
+        ssh -o StrictHostKeyChecking=no -i ${{ secrets.DEPLOY_KEY }} user@144.126.208.105 << 'EOF'
+          docker pull pmoise021/hello-world-python:latest
+          docker stop hello-world-app || true
+          docker rm hello-world-app || true
+          docker run -d --name hello-world-app -p 80:8080 pmoise021/hello-world-python:latest
+        EOF
