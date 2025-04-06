@@ -1,4 +1,5 @@
 *.pyc
 *.pyo
 __pycahe__/
-.env
+.en
+venv/
