@@ -37,3 +37,4 @@ jobs:
           docker rm hello-world-app || true
           docker run -d --name hello-world-app -p 80:8080 pmoise021/hello-world-python:latest
         EOF
+
