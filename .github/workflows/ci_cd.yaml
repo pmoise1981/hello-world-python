@@ -31,7 +31,9 @@ jobs:
 
     - name: Deploy to server via SSH
       run: |
-        ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key user@144.126.208.105 << 'EOF'
+        echo "${{ secrets.DEPLOY_KEY }}" > deploy_key
+        chmod 600 deploy_key
+        ssh -o StrictHostKeyChecking=no -i deploy_key user@144.126.208.105 << 'EOF'
           docker pull pmoise021/hello-world-python:latest
           docker stop hello-world-app || true
           docker rm hello-world-app || true
