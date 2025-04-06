@@ -32,13 +32,12 @@ jobs:
     - name: Set up SSH key
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa_newdo
-        chmod 600 ~/.ssh/id_rsa_newdo  # Correct permissions
-        ssh-keyscan -H 144.126.208.105 >> ~/.ssh/known_hosts  # Add the server to known hosts
+        echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
 
     - name: Deploy to server via SSH
       run: |
-        ssh -i ~/.ssh/id_rsa_newdo user@144.126.208.105 << 'EOF'
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@144.126.208.105 << 'EOF'
           docker pull pmoise021/hello-world-python:latest
           docker stop hello-world-app || true
           docker rm hello-world-app || true
