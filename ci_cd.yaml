@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Trigger workflow on push to the main branch
+      - main
 
 jobs:
   build:
@@ -31,7 +31,7 @@ jobs:
 
     - name: Deploy to server via SSH
       run: |
-        ssh -o StrictHostKeyChecking=no -i ${{ secrets.DEPLOY_KEY }} user@144.126.208.105 << 'EOF'
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key user@144.126.208.105 << 'EOF'
           docker pull pmoise021/hello-world-python:latest
           docker stop hello-world-app || true
           docker rm hello-world-app || true
