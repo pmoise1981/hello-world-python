@@ -41,6 +41,6 @@ jobs:
           docker pull pmoise021/hello-world-python:latest
           docker stop hello-world-app || true
           docker rm hello-world-app || true
-          docker run -d --name hello-world-app -p 80:8080 pmoise021/hello-world-python:latest
+          docker run -d --name hello-world-app -p 8080:8080 pmoise021/hello-world-python:latest
         EOF
 
