@@ -2,9 +2,6 @@ Flask Docker CI/CD Pipeline
 This project demonstrates how to set up a Flask application, containerize it with Docker, and implement a CI/CD pipeline using GitHub Actions to automate the build and deployment process to a remote server.
 
 Project Structure
-bash
-Copy
-Edit
 .
 ├── app.py                # The main Flask application
 ├── Dockerfile            # Dockerfile to containerize the application
