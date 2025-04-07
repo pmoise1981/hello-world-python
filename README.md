@@ -1,93 +1,101 @@
-Flask Docker CI/CD Pipeline
-This project demonstrates how to set up a Flask application, containerize it with Docker, and implement a CI/CD pipeline using GitHub Actions to automate the build and deployment process to a remote server.
+# Flask Docker CI/CD Pipeline
 
-Project Structure
-.
-├── app.py                # The main Flask application
-├── Dockerfile            # Dockerfile to containerize the application
-├── requirements.txt      # Python dependencies
-├── ci_cd.yml             # GitHub Actions CI/CD pipeline configuration
-└── README.md             # Project documentation
-Prerequisites
-Before getting started, make sure you have the following:
+This project demonstrates how to:
 
-Docker installed on your local machine for building and running containers.
+- Build a simple Flask application  
+- Containerize it with Docker  
+- Set up CI/CD with GitHub Actions  
+- Deploy it to a remote server (e.g., **DigitalOcean**)
 
-A GitHub account to access the repository and set up the CI/CD pipeline.
+---
 
-SSH access to a remote server for deployment.
+## 📁 Project Structure
 
-Setup
-1. Clone the repository
-Clone this repository to your local machine:
+ ├── app.py # The main Flask application ├── Dockerfile # Dockerfile to containerize the app ├── requirements.txt # Python dependencies ├── ci_cd.yml # GitHub Actions CI/CD configuration └── README.md # Project documentation
+
+
+---
+
+## ✅ Prerequisites
+
+- Docker installed on your local machine  
+- A GitHub account to use GitHub Actions  
+- SSH access to a remote server (like DigitalOcean) with Docker installed  
+- Docker Hub account for storing your container image
+
+---
+
+## 🛠️ Setup
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/pmoise1981/hello-world-python.git
 cd hello-world-python
 
-2. Install dependencies
-Install the dependencies listed in requirements.txt:
+2. Install Dependencies
 pip install -r requirements.txt
 
-
-3. Build Docker Image
-Build the Docker image using the provided Dockerfile:
+### 3. Build Docker Image
 docker build -t hello-world-python .
 
-
-4. Run Flask Application in Docker
-Run the Flask app in Docker:
-
+### 4. Run the Flask App in Docker
 docker run -d -p 8080:8080 hello-world-python
-The application will be available at http://localhost:8080.
+Visit: http://localhost:8080
 
-CI/CD Pipeline
-GitHub Actions
-The project includes a CI/CD pipeline configured using GitHub Actions in the ci_cd.yml file. It automates the process of:
+CI/CD Pipeline with GitHub Actions
+The CI/CD pipeline (defined in ci_cd.yml) does the following:
 
-Building the Docker image.
+Builds the Docker image
 
-Pushing the Docker image to Docker Hub.
+Pushes it to Docker Hub
 
-Deploying the image to a remote server using SSH.
+Deploys it to a remote server (DigitalOcean) via SSH
 
-1. Setup GitHub Secrets
-In your GitHub repository, set up the following secrets:
+GitHub Secrets Needed
+Secret Name	Description
+DOCKER_USERNAME	Your Docker Hub username
+DOCKER_PASSWORD	Your Docker Hub password
+DEPLOY_KEY	Your private SSH key for server access
+The pipeline is triggered on every push to the main branch.
 
-DOCKER_USERNAME: Your Docker Hub username.
+Example Workflow Steps
+Checkout Code
 
-DOCKER_PASSWORD: Your Docker Hub password.
+Set Up Docker Buildx
 
-DEPLOY_KEY: Your private SSH key for server access.
+Login to Docker Hub
 
-2. Trigger the CI/CD Pipeline
-Push changes to the main branch of the repository, and the pipeline will automatically trigger, building and deploying the latest changes to your remote server.
+Build and Push Image
 
-Example CI/CD Pipeline Steps
-Checkout Code: The pipeline checks out the code from your repository.
+SSH into DigitalOcean and Deploy
 
-Docker Setup: It sets up Docker Buildx for building the image.
+🚀 Deployment to DigitalOcean
+Your remote server (e.g., DigitalOcean droplet) must have Docker installed and SSH access enabled.
 
-Login to Docker Hub: Logs into Docker Hub using the provided credentials.
+Deployment Process:
 
-Build and Push Docker Image: Builds the Docker image and pushes it to Docker Hub with the latest tag.
+GitHub Actions connects to your server via SSH
 
-Deploy via SSH: Pulls the latest image on the remote server and restarts the Docker container with the updated image.
+Stops and removes any existing container
 
-Deployment
-The Flask application is deployed on a remote server via SSH. The server must have Docker installed.
+Pulls the latest Docker image from Docker Hub
 
-Deployment Process
-The GitHub Actions pipeline pulls the latest Docker image.
+Starts a new container using the updated image
 
-The existing container is stopped and removed (if any).
+Access the App
+Visit:
+http://<your-digitalocean-ip>:8080
 
-The new container is started with the updated image.
+✅ Testing
+Local: http://localhost:8080
 
-Testing
-You can test the application by navigating to:
-http://localhost:8080
-If the application is deployed on a remote server, you can access it using the server’s IP address and port.
+Remote: http://your-server-ip:8080
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+👨‍💻 Author
+Pierre Moïse
+GitHub • Cloud Deployment with Docker & CI/CD
+
+
 
 
