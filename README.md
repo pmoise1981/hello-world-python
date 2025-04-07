@@ -92,6 +92,9 @@ Local: http://localhost:8080
 
 Remote: http://your-server-ip:8080
 
+ 💡 Want to see a live demo? Reach out to me and I’ll share access!
+
+
 👨‍💻 Author
 Pierre Moïse
 GitHub • Cloud Deployment with Docker & CI/CD
